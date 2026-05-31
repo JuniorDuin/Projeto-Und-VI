@@ -52,7 +52,7 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
   describe('Cadastro de contato', () => {
     it('deve cadastrar um contato com sucesso', () => {
       cy.get('#nome').type('Maria Silva')
-      cy.get('#email').type('maria@email.com')
+      cy.get('#email').type(`maria${Date.now()}@email.com`)
       cy.get('#telefone').type('(85) 99999-0001')
       cy.get('#btnSalvar').click()
       cy.get('#mensagem').should('contain.text', 'sucesso')
@@ -60,7 +60,7 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
 
     it('deve limpar os campos após cadastro', () => {
       cy.get('#nome').type('Carlos Souza')
-      cy.get('#email').type('carlos@email.com')
+      cy.get('#email').type(`carlos${Date.now()}@email.com`)
       cy.get('#telefone').type('(85) 99999-0002')
       cy.get('#btnSalvar').click()
       cy.get('#nome').should('have.value', '')
@@ -70,7 +70,7 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
 
     it('deve exibir o contato cadastrado na lista', () => {
       cy.get('#nome').type('Ana Lima')
-      cy.get('#email').type('ana@email.com')
+      cy.get('#email').type(`ana${Date.now()}@email.com`)
       cy.get('#telefone').type('(85) 99999-0003')
       cy.get('#btnSalvar').click()
       cy.get('#listaContatos').should('contain.text', 'Ana Lima')
@@ -78,7 +78,7 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
 
     it('deve incrementar o contador ao cadastrar', () => {
       cy.get('#nome').type('Pedro Costa')
-      cy.get('#email').type('pedro@email.com')
+      cy.get('#email').type(`pedro${Date.now()}@email.com`)
       cy.get('#telefone').type('(85) 99999-0004')
       cy.get('#btnSalvar').click()
       cy.get('#totalContatos').invoke('text').then(Number).should('be.greaterThan', 0)
@@ -108,9 +108,10 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
   // ── Fluxo completo ──────────────────────────────────────────────
   describe('Fluxo completo do usuário', () => {
     it('deve cadastrar múltiplos contatos e exibir todos', () => {
+      const ts = Date.now()
       const contatos = [
-        { nome: 'Lucas Alves', email: 'lucas@email.com', tel: '(85) 91111-0001' },
-        { nome: 'Beatriz Nunes', email: 'beatriz@email.com', tel: '(85) 92222-0002' },
+        { nome: 'Lucas Alves', email: `lucas${ts}@email.com`, tel: '(85) 91111-0001' },
+        { nome: 'Beatriz Nunes', email: `beatriz${ts}@email.com`, tel: '(85) 92222-0002' },
       ]
 
       contatos.forEach(c => {
