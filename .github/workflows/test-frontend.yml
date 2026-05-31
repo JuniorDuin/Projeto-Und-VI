@@ -51,6 +51,13 @@ jobs:
         working-directory: frontend
         run: npx cypress run --spec "cypress/e2e/frontend.cy.js" --browser chrome --headless
 
+      - name: Upload de vídeos (evidência)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cypress-videos-frontend
+          path: frontend/cypress/videos
+
       - name: Upload de screenshots (se falhar)
         uses: actions/upload-artifact@v4
         if: failure()
