@@ -1,0 +1,59 @@
+name: Testes Frontend
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
+
+jobs:
+  test-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências do backend
+        working-directory: backend
+        run: npm install
+
+      - name: Iniciar o backend em background
+        working-directory: backend
+        run: node server.js &
+        env:
+          PORT: 3001
+
+      - name: Aguardar backend subir
+        run: npx wait-on http://localhost:3001/contatos
+
+      - name: Instalar dependências do frontend
+        working-directory: frontend
+        run: npm install
+
+      - name: Iniciar servidor do frontend em background
+        working-directory: frontend
+        run: npx http-server . -p 5500 -c-1 --silent &
+
+      - name: Aguardar frontend subir
+        run: npx wait-on http://localhost:5500
+
+      - name: Executar testes unitários do frontend
+        working-directory: frontend
+        run: npx cypress run --spec "cypress/e2e/contatos.unidade.cy.js"
+
+      - name: Executar testes E2E do frontend
+        working-directory: frontend
+        run: npx cypress run --spec "cypress/e2e/frontend.cy.js" --browser chrome --headless
+
+      - name: Upload de screenshots (se falhar)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-frontend
+          path: frontend/cypress/screenshots

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Agenda de Contatos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <main class="wrapper">
+    <header class="header">
+      <div class="header-icon">✦</div>
+      <h1>Agenda</h1>
+      <p class="subtitle">Cadastro de Contatos</p>
+    </header>
+
+    <section class="form-card">
+      <h2 class="form-title">Novo Contato</h2>
+      <form id="formContato">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" placeholder="Nome completo" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" placeholder="email@exemplo.com" autocomplete="off" />
+        </div>
+        <div class="field">
+          <label for="telefone">Telefone</label>
+          <input type="text" id="telefone" placeholder="(00) 00000-0000" autocomplete="off" />
+        </div>
+        <button type="submit" id="btnSalvar">Salvar Contato</button>
+      </form>
+      <p id="mensagem" class="mensagem"></p>
+    </section>
+
+    <section class="lista-section">
+      <div class="lista-header">
+        <h2>Contatos Salvos</h2>
+        <span id="totalContatos" class="badge">0</span>
+      </div>
+      <div id="listaContatos" class="lista"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

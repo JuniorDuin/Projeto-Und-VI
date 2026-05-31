@@ -1,0 +1,262 @@
+:root {
+  --bg: #0d0f14;
+  --surface: #161920;
+  --border: #252830;
+  --accent: #c8f04a;
+  --accent-dark: #a8cc30;
+  --text: #f0f2f5;
+  --text-muted: #7a8090;
+  --danger: #ff5a5a;
+  --radius: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200, 240, 74, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 240, 74, 0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px 20px 80px;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeDown 0.6s ease both;
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+  display: block;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 3rem;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 6px;
+  font-weight: 300;
+}
+
+/* FORM CARD */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  margin-bottom: 32px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+
+.form-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200, 240, 74, 0.1);
+}
+
+input::placeholder {
+  color: #3a3f4a;
+}
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px;
+  background: var(--accent);
+  color: #0d0f14;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover { background: var(--accent-dark); }
+button[type="submit"]:active { transform: translateY(1px); }
+
+.mensagem {
+  margin-top: 12px;
+  font-size: 0.88rem;
+  min-height: 20px;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.mensagem.sucesso { color: var(--accent); }
+.mensagem.erro    { color: var(--danger); }
+
+/* LISTA */
+.lista-section {
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.lista-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.lista-header h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.badge {
+  background: var(--accent);
+  color: #0d0f14;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 99px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contato-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  animation: fadeUp 0.3s ease both;
+  transition: border-color 0.2s;
+}
+
+.contato-card:hover { border-color: #3a3f4a; }
+
+.contato-info { flex: 1; }
+
+.contato-nome {
+  font-weight: 500;
+  font-size: 0.97rem;
+  margin-bottom: 3px;
+}
+
+.contato-detalhe {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.btn-deletar {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.btn-deletar:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+  background: rgba(255, 90, 90, 0.08);
+}
+
+.lista-vazia {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 40px 0;
+  font-size: 0.9rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* ANIMATIONS */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

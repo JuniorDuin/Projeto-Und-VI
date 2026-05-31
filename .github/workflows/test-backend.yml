@@ -1,0 +1,48 @@
+name: Testes Backend
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+  workflow_dispatch:
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Instalar dependências do backend
+        working-directory: backend
+        run: npm install
+
+      - name: Iniciar o backend em background
+        working-directory: backend
+        run: node server.js &
+        env:
+          PORT: 3001
+
+      - name: Aguardar backend subir
+        run: npx wait-on http://localhost:3001/contatos
+
+      - name: Executar testes unitários do backend
+        working-directory: backend
+        run: npx cypress run --spec "cypress/e2e/contatos.unidade.cy.js"
+
+      - name: Executar testes de API do backend
+        working-directory: backend
+        run: npx cypress run --spec "cypress/e2e/backend.cy.js" --browser chrome --headless
+
+      - name: Upload de screenshots (se falhar)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: cypress-screenshots-backend
+          path: backend/cypress/screenshots

@@ -1,0 +1,15 @@
+{
+  "name": "contatos-frontend",
+  "version": "1.0.0",
+  "description": "Frontend da aplicação Agenda de Contatos",
+  "scripts": {
+    "serve": "http-server . -p 5500 -c-1 --silent",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test": "cypress run --spec 'cypress/e2e/frontend.cy.js'"
+  },
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "http-server": "^14.1.1"
+  }
+}
