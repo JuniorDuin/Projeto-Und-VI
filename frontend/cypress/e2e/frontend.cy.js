@@ -87,21 +87,21 @@ describe('Agenda de Contatos — Frontend (E2E)', () => {
 
   // ── Remoção de contato ──────────────────────────────────────────
   describe('Remoção de contato', () => {
-    beforeEach(() => {
+    it('deve exibir o botão de remover em cada contato', () => {
       cy.get('#nome').type('Contato Temporário')
-      cy.get('#email').type('temp@email.com')
+      cy.get('#email').type(`temp${Date.now()}@email.com`)
       cy.get('#telefone').type('(85) 99999-0099')
       cy.get('#btnSalvar').click()
-      cy.get('#listaContatos').should('contain.text', 'Contato Temporário')
-    })
-
-    it('deve exibir o botão de remover em cada contato', () => {
-      cy.get('.btn-deletar').should('be.visible')
+      cy.get('.btn-deletar').last().should('be.visible')
     })
 
     it('deve remover o contato ao clicar em Remover', () => {
-      cy.get('.btn-deletar').first().click()
-      cy.get('#listaContatos').should('not.contain.text', 'Contato Temporário')
+      cy.get('#nome').type('Contato Temporário2')
+      cy.get('#email').type(`temp2${Date.now()}@email.com`)
+      cy.get('#telefone').type('(85) 99999-0098')
+      cy.get('#btnSalvar').click()
+      cy.get('.contato-card').last().find('.btn-deletar').click()
+      cy.get('.contato-card').last().should('not.contain.text', 'Contato Temporário2')
     })
   })
 
