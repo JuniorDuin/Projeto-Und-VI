@@ -1,5 +1,5 @@
 'use strict';
-
+ 
 /**
  * Funções puras de validação de contatos.
  * Separadas do server.js para permitir testes unitários isolados.
